@@ -1,6 +1,7 @@
 from logo import logo, logo2, logo3
 from student_list import student_rolls, names
 from prettytable import PrettyTable
+from prettytable import PrettyTable
 print(logo)
 print(logo3)
 
@@ -104,24 +105,7 @@ class AttendanceSystem:
         print(f"Room Number: {self.room_number}")
         print(f"Total Students Registered: {len(self.students)}")
 
-    # def show_summary(self):
-    #     print("\n--- Attendance Summary ---")
-    #     print(f"Total Students Registered: {len(self.students)}")
-    #     print(f"Total Students Present: {len(self.attendance)}")
-    #     print(f"Total Students Absent: {len(self.students) - len(self.attendance)}")
-    #
-    #     print("\nPresent Students:")
-    #     for student_id in self.attendance:
-    #         print(self.students[student_id].name)
-    #
-    #     print("\nAbsent Students:")
-    #     for student_id, student in self.students.items():
-    #         if student_id not in self.attendance:
-    #             print(student.name)
-
-    from prettytable import PrettyTable
-
-    # Update the show_summary function to use PrettyTable
+   # Update the show_summary function to use PrettyTable
     def show_summary(self):
         print("\n--- Attendance Summary ---")
 
