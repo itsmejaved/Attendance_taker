@@ -2,10 +2,9 @@ from logo import logo, logo2, logo3
 from student_list import student_rolls, names
 from prettytable import PrettyTable
 from prettytable import PrettyTable
+
 print(logo)
 print(logo3)
-
-
 
 
 # Utility function to update the student_list.py file
@@ -105,7 +104,7 @@ class AttendanceSystem:
         print(f"Room Number: {self.room_number}")
         print(f"Total Students Registered: {len(self.students)}")
 
-   # Update the show_summary function to use PrettyTable
+    # Update the show_summary function to use PrettyTable
     def show_summary(self):
         print("\n--- Attendance Summary ---")
 
@@ -146,37 +145,40 @@ def admin_interface(attendance_system):
         print("3 - View Attendance Summary")
         print("4 - Complete Session")
 
-    show_menu()
     while True:
+        show_menu()
         command = input("\nEnter the number of your action choice (1, 2, 3, or 4): ").strip()
 
         if command == "1":
-            student_id = int(input("Enter Student ID to register: "))
-            name = input("Enter Student Name: ")
-            attendance_system.register_student(student_id, name)
+            try:
+                student_id = int(input("Enter Student ID to register: "))
+                name = input("Enter Student Name: ")
+                attendance_system.register_student(student_id, name)
+            except ValueError:
+                print("Invalid Student ID. Please enter a numerical ID.")
+            finally:
+                attendance_system.class_status()
 
         elif command == "2":
-            print("Entering attendance mode. Enter '0' or 'exit' to stop taking attendance.")
+            print("\nEntering attendance mode. Enter '0' or 'exit' to stop taking attendance.")
             while True:
                 student_id_input = input("Enter Student ID for attendance: ").strip()
                 if student_id_input == "0" or student_id_input.lower() == "exit":
-                    print("Exiting attendance mode.")
-                    show_menu()  # Show menu again when exiting attendance mode
+                    print("\nExiting attendance mode.")
                     break
-                else:
-                    try:
-                        student_id = int(student_id_input)
-                        attendance_system.give_attendance(student_id)
-                        print("Press 0 or type 'exit' to come out.")
-                    except ValueError:
-                        print("Invalid input. Please enter a valid Student ID or '0'/'exit'.")
+                try:
+                    student_id = int(student_id_input)
+                    attendance_system.give_attendance(student_id)
+                except ValueError:
+                    print("Invalid input. Please enter a valid Student ID or '0'/'exit'.")
+
 
         elif command == "3":
             attendance_system.show_summary()
 
         elif command == "4":
-            print("Session complete.")
-            attendance_system.show_summary()  # Display final summary
+            print("\nSession complete. Final summary:")
+            attendance_system.show_summary()
             break
 
         else:
@@ -197,10 +199,9 @@ username = input("Admin Username: ")
 password = input("Admin Password: ")
 
 if attendance_system.admin.login(username, password):
-    print("Admin Login Successful")
-    # Display class information immediately after login
-    attendance_system.class_status()
-    # Call the admin interface after showing class information
-    admin_interface(attendance_system)
+    print("\nAdmin Login Successful.")
+    attendance_system.class_status()  # Display initial class information
+    admin_interface(attendance_system)  # Launch admin interface
 else:
-    print("Admin login failed.")
+    print("\nAdmin login failed. Please try again.")
+
