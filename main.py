@@ -54,11 +54,11 @@ class Admin:
 # --------------- Attendance -----------------------
 class AttendanceSystem:
     def __init__(self, subject, lecturer, room_number, admin_username, admin_password, student_rolls, names):
-        self.students = {}  # Dictionary to store students
+        self.students = {}  
         self.subject = subject
         self.lecturer = lecturer
         self.room_number = room_number
-        self.attendance = set()  # Set to store student IDs for attendance
+        self.attendance = set() 
         self.admin = Admin(admin_username, admin_password)
 
         # Pre-register students in the background
@@ -79,7 +79,7 @@ class AttendanceSystem:
             print(f"Student {name} is already registered.")
         else:
             self.students[student_id] = Student(student_id, name)
-            register_student_and_update_file(student_id, name)  # Register and update the file
+            register_student_and_update_file(student_id, name) 
             print(f"Student {name} has been registered successfully.")
 
     def give_attendance(self, student_id):
@@ -200,8 +200,8 @@ password = input("Admin Password: ")
 
 if attendance_system.admin.login(username, password):
     print("\nAdmin Login Successful.")
-    attendance_system.class_status()  # Display initial class information
-    admin_interface(attendance_system)  # Launch admin interface
+    attendance_system.class_status() 
+    admin_interface(attendance_system) 
 else:
     print("\nAdmin login failed. Please try again.")
 
